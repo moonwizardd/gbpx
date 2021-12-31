@@ -6,7 +6,10 @@
 // @author       You
 // @match        https://gbpx.gd.gov.cn/gdceportal/Study/*
 // @match        https://*.shawcoder.xyz/*
-// @run-at      document-end
+// @grant        unsafeWindow
+// @grant        GM_openInTab
+// @run-at       document-end
+// @note         https://raw.fastgit.org/2xx8/gbpx/main/main.js
 // ==/UserScript==
 
 (function() {
@@ -60,15 +63,39 @@
 
         let course_url = 'https://gbpx.gd.gov.cn/gdceportal/Study/'+ course_link_01.href.slice(14,67)
         console.log('已打开页面-> '+course_url)
-        let win = window.open(course_url);
+        let win = window.open(course_url, 'course_page', '');
+        setInterval(function(){
+            if (win.closed) {
+                //窗口不存在
+                location.reload()
+            } else {
+                //窗口存在
+                //console.log('视频窗口存在')
+            }
+        },5000);
+
+
+        /*
+        setInterval(function(){
+            let win_check = window.open("", 'course_page', '');
+            if (win_check.location.href == "about:blank") {
+                //窗口不存在
+                location.reload()
+            } else {
+                //窗口存在
+                //win.focus();
+            }
+            win_check.close()
+        },1000);
+        */
 
         var course_need_time =document.querySelector('#gvList > tbody > tr:nth-child(2) > td:nth-child(2)')
         if (course_need_time){
-            let course_percent = parseInt(document.querySelector("#gvList > tbody > tr:nth-child(2) > td:nth-child(5) > div > div:nth-child(2)").textContent)*0.01
+            let course_percent = parseFloat(document.querySelector("#gvList > tbody > tr:nth-child(2) > td:nth-child(5) > div > div:nth-child(2)").textContent)*0.01
             let study_time_hour = parseFloat(course_need_time.textContent)
 
             //一个学时对应大概42-45min
-            let study_time_secend = study_time_hour/60*45*60*60*(1-course_percent)+10
+            let study_time_secend = parseInt(study_time_hour/60*45*60*60*(1-course_percent))+10
 
             //let study_time_secend = 10*60
             console.log('此页面刷新时间：'+study_time_secend+'s,当前进度'+course_percent*100+'%')
@@ -84,8 +111,8 @@
     }
 
 
-    function sleep (time) {
-        return new Promise((resolve) => setTimeout(resolve, time));
+    function sleep (time_ms) {
+        return new Promise((resolve) => setTimeout(resolve, time_ms));
     }
 
     /*
