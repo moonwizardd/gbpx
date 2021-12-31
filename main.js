@@ -18,6 +18,13 @@
 
     'use strict';
 
+    //列表页一级页面
+    if(window.location.pathname == '/gdceportal/Study/StudyCenter.aspx'){
+        sleep(AUTO_REFRESH_TIME*1000).then(() => {
+            //location.reload(true)
+        })
+    }
+
     //课程列表页面
     if(window.location.pathname == '/gdceportal/Study/LearningCourse.aspx'){
         //console.log('检测到课程列表页面...')
@@ -28,18 +35,24 @@
     }
 
     //打开后课程页面
+    /*
     if(window.location.pathname == '/gdceportal/Study/CourseDetail.aspx'){
+
+
+        var alert=function(){return 1}
+
         //console.log('准备播放视频...')
         var button_start_learn = document.querySelector('#btnStudy')
         if(button_start_learn){
             setTimeout(button_start_learn.click(),1000)
         }
     }
+    */
 
     //视频播放页面
     if(window.location.host == 'wcs1.shawcoder.xyz' & window.location.pathname == '/gdcecw/play_pc/playmp4_pc.html'){
         window.onload=function(){
-            //console.log('自动播放视频')
+            console.log('自动播放视频')
             let is_muted = false;
             const k = 20;
             let j = 0;
@@ -68,8 +81,13 @@
         //document.querySelector("#gvList_ctl02_HyperLink1").innerText = '**学习中**'
 
         //拼接课程视频页面url
-        let course_url = 'https://gbpx.gd.gov.cn/gdceportal/Study/'+ course_link_01.href.slice(14,67)
         //console.log('已打开页面-> '+course_url)
+        //let course_url = 'https://gbpx.gd.gov.cn/gdceportal/Study/'+ course_link_01.href.slice(14,67)
+
+
+        //拼接跳转后的地址
+        let cid = course_link_01.href.slice(14+21,67)
+        let course_url = 'https://wcs1.shawcoder.xyz/gdcecw/play_pc/playverif_pc.html?t=2f4fd72bdf4a421f8e83d72060c414f5&courseLabel=wlxy&courseId='+cid
 
         var body = document.getElementsByTagName("body");
         var div = document.createElement("div");
@@ -101,22 +119,8 @@
             sleep(refresh_time_second*1000).then(() => {
                 //console.log('移除iframe')
                 //document.querySelector('iframe#auto_gbpx').remove()
-
-                //延迟重新载入页面
                 location.reload(true)
 
-                /*
-
-                reload 方法，该方法强迫浏览器刷新当前页面。
-                语法：location.reload([bForceGet])
-                参数： bForceGet， 可选参数， 默认为 false，从客户端缓存里取当前页。true, 则以 GET 方式，从服务端取最新的页面, 相当于客户端点击 F5("刷新")
-
-                reload() 方法用于重新加载当前文档。
-                如果该方法没有规定参数，或者参数是 false，它就会用 HTTP 头 If-Modified-Since 来检测服务器上的文档是否已改变。
-                如果文档已改变，reload() 会再次下载该文档。
-                如果文档未改变，则该方法将从缓存中装载文档。这与用户单击浏览器的刷新按钮的效果是完全一样的。
-
-                */
             })
         }
     }
