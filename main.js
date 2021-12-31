@@ -4,11 +4,12 @@
 // @version      0.1
 // @description  try to take over the world!
 // @author       You
-// @match        https://gbpx.gd.gov.cn/gdceportal/Study/*
+// @match        https://gbpx.gd.gov.cn/*
 // @match        https://*.shawcoder.xyz/*
 // @grant        unsafeWindow
 // @grant        GM_openInTab
-// @run-at       document-end
+// @run-at       document-start
+
 
 // ==/UserScript==
 
@@ -17,6 +18,12 @@
     const AUTO_REFRESH_TIME = 300
 
     'use strict';
+
+    //取消alert弹窗
+    unsafeWindow.alert = function(){return false};
+    window.alert = function(){return false};
+    Window.prototype.alert = function(){return false};
+
 
     //列表页一级页面
     if(window.location.pathname == '/gdceportal/Study/StudyCenter.aspx'){
@@ -28,26 +35,22 @@
     //课程列表页面
     if(window.location.pathname == '/gdceportal/Study/LearningCourse.aspx'){
         //console.log('检测到课程列表页面...')
-        var course_link_01 = document.querySelector('#gvList_ctl02_HyperLink2')
-        if (course_link_01) {
-            setTimeout(open_course_link(),3000)
-        }
+        var selector_course = '#gvList_ctl02_HyperLink2'
+        wait_element(selector_course,function(){
+            setTimeout(do_study(selector_course),3000)
+        })
     }
 
     //打开后课程页面
-    /*
+
     if(window.location.pathname == '/gdceportal/Study/CourseDetail.aspx'){
-
-
-        var alert=function(){return 1}
-
         //console.log('准备播放视频...')
-        var button_start_learn = document.querySelector('#btnStudy')
-        if(button_start_learn){
-            setTimeout(button_start_learn.click(),1000)
-        }
+        var selector_start_button = '#btnStudy'
+        wait_element(selector_start_button,function(){
+            document.querySelector(selector_start_button).click()
+        })
     }
-    */
+
 
     //视频播放页面
     if(window.location.host == 'wcs1.shawcoder.xyz' & window.location.pathname == '/gdcecw/play_pc/playmp4_pc.html'){
@@ -73,8 +76,9 @@
         }
     }
 
-    function open_course_link(){
+    function do_study(selector){
 
+        let course_link = document.querySelector(selector)
         //第一个课程变色
         document.querySelector("#gvList > tbody > tr:nth-child(2)").style.backgroundColor = "yellow"
         document.querySelector("#gvList > tbody > tr:nth-child(2)").style.color = "red"
@@ -82,11 +86,11 @@
 
         //拼接课程视频页面url
         //console.log('已打开页面-> '+course_url)
-        //let course_url = 'https://gbpx.gd.gov.cn/gdceportal/Study/'+ course_link_01.href.slice(14,67)
+        //let course_url = 'https://gbpx.gd.gov.cn/gdceportal/Study/'+ course_link.href.slice(14,67)
 
 
         //拼接跳转后的地址
-        let cid = course_link_01.href.slice(14+21,67)
+        let cid = course_link.href.slice(14+21,67)
         let course_url = 'https://wcs1.shawcoder.xyz/gdcecw/play_pc/playverif_pc.html?t=2f4fd72bdf4a421f8e83d72060c414f5&courseLabel=wlxy&courseId='+cid
 
         var body = document.getElementsByTagName("body");
