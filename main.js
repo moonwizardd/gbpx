@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         A广东干部学习[无弹窗]
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      1.2
 // @description  try to take over the world!
 // @author       You
 // @match        https://gbpx.gd.gov.cn/*
@@ -85,13 +85,14 @@
         //document.querySelector("#gvList_ctl02_HyperLink1").innerText = '**学习中**'
 
         //拼接课程视频页面url
-        //console.log('已打开页面-> '+course_url)
-        //let course_url = 'https://gbpx.gd.gov.cn/gdceportal/Study/'+ course_link.href.slice(14,67)
+        
+        let course_url = 'https://gbpx.gd.gov.cn/gdceportal/Study/'+ course_link.href.slice(14,67)
+        console.log('已打开页面-> '+course_url)
 
 
         //拼接跳转后的地址
-        let cid = course_link.href.slice(14+21,67)
-        let course_url = 'https://wcs1.shawcoder.xyz/gdcecw/play_pc/playverif_pc.html?t=2f4fd72bdf4a421f8e83d72060c414f5&courseLabel=wlxy&courseId='+cid
+        //let cid = course_link.href.slice(14+21,67)
+        //let course_url = 'https://wcs1.shawcoder.xyz/gdcecw/play_pc/playverif_pc.html?t=2f4fd72bdf4a421f8e83d72060c414f5&courseLabel=wlxy&courseId='+cid
 
         var body = document.getElementsByTagName("body");
         var div = document.createElement("div");
