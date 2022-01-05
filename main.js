@@ -1,9 +1,11 @@
 // ==UserScript==
-// @name         A广东干部学习[无弹窗]
+// @name         GD干部学习[不弹窗]
 // @namespace    http://tampermonkey.net/
-// @version      1.2
+// @version      1.5
 // @description  try to take over the world!
-// @author       You
+// @author       404
+// @updateURL    https://raw.githubusercontent.com/2xx8/gbpx/main/main.js
+
 // @match        https://gbpx.gd.gov.cn/*
 // @match        https://*.shawcoder.xyz/*
 // @grant        unsafeWindow
