@@ -7,8 +7,9 @@ https://gbpx.gd.gov.cn/gdceportal/Study/StudyCenter.aspx?type=%e5%ad%a6%e4%b9%a0
 
 ##2.将本项目main.js添加到TamperMonkey中，开启脚本辅助学习
 
-#3.调整已选课程或取消选课，先关闭脚本
+##3.调整已选课程或取消选课，先关闭脚本
 
 
-#存在问题
-页面弹出的alert窗口通过脚本无法干预，导致无法自动顺序播放
+#待解决
+##1.PPT课程页面学习
+##2.需考试的课程，视频学习后跳过
