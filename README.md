@@ -1,7 +1,9 @@
 # 用于广东省干部培训网络学院辅助学习
-https://gbpx.gd.gov.cn/
+
+# https://gbpx.gd.gov.cn/
 
 1.在课程页面选课
+
 https://gbpx.gd.gov.cn/gdceportal/Study/StudyCenter.aspx?type=%e5%ad%a6%e4%b9%a0%e4%bf%a1%e6%81%af
 
 注意：不要选需要考试的课程
@@ -12,5 +14,7 @@ https://gbpx.gd.gov.cn/gdceportal/Study/StudyCenter.aspx?type=%e5%ad%a6%e4%b9%a0
 
 
 # 待解决
+
 1.PPT课程页面学习
+
 2.需考试的课程，视频学习后跳过
